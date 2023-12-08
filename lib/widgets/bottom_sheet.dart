@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'custom_text_field.dart';
+import 'form_widget.dart';
 
 class BottomSheetContent extends StatelessWidget {
   const BottomSheetContent({
@@ -9,25 +10,9 @@ class BottomSheetContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding:
-          const EdgeInsetsDirectional.symmetric(vertical: 50, horizontal: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const CustomTextField(label: 'title'),
-          const SizedBox(height: 16),
-          const CustomTextField(label: 'content', maxLines: 5),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.lightBlueAccent,
-                foregroundColor: Colors.black),
-            child: const Text('Add'),
-          )
-        ],
-      ),
+    return const SingleChildScrollView(
+      padding: EdgeInsetsDirectional.symmetric(vertical: 50, horizontal: 12),
+      child: FormWidget(),
     );
   }
 }
