@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:notes/views/home_view.dart';
 
 void main() {
@@ -13,7 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(brightness: Brightness.dark),
+      theme: ThemeData(
+          brightness: Brightness.dark,
+          fontFamily: GoogleFonts.poppins.toString()),
       initialRoute: HomeView.routeName,
       routes: {HomeView.routeName: (context) => const HomeView()},
     );
