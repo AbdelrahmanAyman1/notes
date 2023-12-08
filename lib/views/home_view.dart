@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/bottom_sheet.dart';
 import '../widgets/custom_note.dart';
-import '../widgets/custom_text_field.dart';
 
 class HomeView extends StatelessWidget {
   static String routeName = 'home';
@@ -41,40 +41,16 @@ class HomeView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            openBottomSheet(context);
+            showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return const BottomSheetContent();
+              },
+            );
           },
           shape: const CircleBorder(eccentricity: 1),
           backgroundColor: Colors.blue,
           child: const Icon(Icons.add)),
-    );
-  }
-
-  void openBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 50),
-          child: Container(
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const CustomTextField(label: 'title'),
-                  const SizedBox(height: 16),
-                  const CustomTextField(label: 'content', maxLines: 5),
-                  const Spacer(),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.lightBlueAccent,
-                        foregroundColor: Colors.black),
-                    child: const Text('Add'),
-                  )
-                ],
-              )),
-        );
-      },
     );
   }
 }
