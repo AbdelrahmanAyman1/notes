@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:notes/views/edit_note_veiw.dart';
 import 'package:notes/views/home_view.dart';
 
 void main() {
@@ -18,7 +19,10 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           fontFamily: GoogleFonts.poppins.toString()),
       initialRoute: HomeView.routeName,
-      routes: {HomeView.routeName: (context) => const HomeView()},
+      routes: {
+        HomeView.routeName: (context) => const HomeView(),
+        EditNoteView.routeName: (context) => const EditNoteView()
+      },
     );
   }
 }
