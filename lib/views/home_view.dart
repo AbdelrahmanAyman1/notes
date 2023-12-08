@@ -39,10 +39,55 @@ class HomeView extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            openBottomSheet(context);
+          },
           shape: const CircleBorder(eccentricity: 1),
           backgroundColor: Colors.blue,
           child: const Icon(Icons.add)),
+    );
+  }
+
+  void openBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 50),
+          child: Container(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const TextField(
+                    decoration: InputDecoration(
+                        label: Text('title'),
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8)))),
+                  ),
+                  const SizedBox(height: 16),
+                  const TextField(
+                    decoration: InputDecoration(
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 50, horizontal: 8),
+                        label: Text('content'),
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8)))),
+                  ),
+                  const Spacer(),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.lightBlueAccent,
+                        foregroundColor: Colors.black),
+                    child: const Text('Add'),
+                  )
+                ],
+              )),
+        );
+      },
     );
   }
 }
