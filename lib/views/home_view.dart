@@ -30,7 +30,19 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      body: const CustomNote(),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return const Padding(
+            padding: EdgeInsets.symmetric(vertical: 4.0),
+            child: CustomNote(),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          shape: const CircleBorder(eccentricity: 1),
+          backgroundColor: Colors.blue,
+          child: const Icon(Icons.add)),
     );
   }
 }
