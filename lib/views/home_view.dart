@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_note.dart';
+import '../widgets/custom_text_field.dart';
 
 class HomeView extends StatelessWidget {
   static String routeName = 'home';
@@ -59,23 +60,9 @@ class HomeView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const TextField(
-                    decoration: InputDecoration(
-                        label: Text('title'),
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8)))),
-                  ),
+                  const CustomTextField(label: 'title'),
                   const SizedBox(height: 16),
-                  const TextField(
-                    decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 50, horizontal: 8),
-                        label: Text('content'),
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8)))),
-                  ),
+                  const CustomTextField(label: 'content', maxLines: 5),
                   const Spacer(),
                   ElevatedButton(
                     onPressed: () {},
