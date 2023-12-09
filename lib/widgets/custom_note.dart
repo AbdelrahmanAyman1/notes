@@ -17,7 +17,7 @@ class CustomNote extends StatelessWidget {
     var provider = Provider.of<LoadNotesProvider>(context);
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, EditNoteView.routeName);
+        Navigator.pushNamed(context, EditNoteView.routeName, arguments: note);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
