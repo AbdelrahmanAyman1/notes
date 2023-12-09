@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:notes/model/note_model.dart';
 import 'package:notes/providers/add_note_provider.dart';
+import 'package:notes/providers/load_notes_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'custom_text_field.dart';
@@ -22,7 +23,8 @@ class _AddNoteFormState extends State<AddNoteForm> {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AddNoteProvider>(context);
+    var addNoteProvider = Provider.of<AddNoteProvider>(context);
+    var loadNoteProvider = Provider.of<LoadNotesProvider>(context);
     return Form(
       key: fomKey,
       autovalidateMode: autoValidateMode,
@@ -55,9 +57,9 @@ class _AddNoteFormState extends State<AddNoteForm> {
                     content: content!,
                     date: DateTime.now().toString(),
                     color: Colors.lightBlueAccent.value);
-                //var noteBox = Hive.box<NoteModel>('notes_box');
-                provider.addNote(noteModel);
+                addNoteProvider.addNote(noteModel);
                 Navigator.pop(context);
+                loadNoteProvider.loadNotes();
               } else {
                 autoValidateMode = AutovalidateMode.always;
                 setState(() {});

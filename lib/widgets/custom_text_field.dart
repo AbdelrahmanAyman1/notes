@@ -20,6 +20,7 @@ class CustomTextField extends StatelessWidget {
         if (value?.isEmpty ?? true) {
           return errorMessage;
         }
+        return null;
       },
       maxLines: maxLines,
       decoration: InputDecoration(

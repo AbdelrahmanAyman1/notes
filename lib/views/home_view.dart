@@ -12,27 +12,19 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) {
-        var provider = LoadNotesProvider();
-        provider.loadNotes(); // Call the method to load notes
-        return provider;
-      },
-      builder: (context, child) {
-        var provider = Provider.of<LoadNotesProvider>(context);
-
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'Notes',
-              style: TextStyle(fontSize: 24),
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.search_rounded,
-                  size: 24,
+    var loadNotesProvider = Provider.of<LoadNotesProvider>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Notes',
+          style: TextStyle(fontSize: 24),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.search_rounded,
+              size: 24,
                 ),
                 style: IconButton.styleFrom(
                   backgroundColor: Colors.white.withOpacity(.05),
@@ -43,30 +35,28 @@ class HomeView extends StatelessWidget {
             ],
           ),
           body: ListView.builder(
-            itemCount: provider.notes.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: CustomNote(note: provider.notes[index]),
-              );
-            },
-          ),
+            itemCount: loadNotesProvider.notes.length,
+        itemBuilder: (context, index) {
+          var note = loadNotesProvider.notes[index];
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: CustomNote(note: note),
+          );
+        },
+      ),
           floatingActionButton: FloatingActionButton(
               onPressed: () {
                 showModalBottomSheet(
                   isScrollControlled: true,
-                  context: context,
-                  builder: (context) {
-                    print(provider.notes.length);
-                    return const BottomSheetContent();
-                  },
-                );
+              context: context,
+              builder: (context) {
+                return const BottomSheetContent();
               },
-              shape: const CircleBorder(eccentricity: 1),
-              backgroundColor: Colors.blue,
-              child: const Icon(Icons.add)),
-        );
-      },
+            );
+          },
+          shape: const CircleBorder(eccentricity: 1),
+          backgroundColor: Colors.blue,
+          child: const Icon(Icons.add)),
     );
   }
 }
