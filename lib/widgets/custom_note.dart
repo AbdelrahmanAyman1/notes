@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:notes/model/note_model.dart';
 import 'package:notes/views/edit_note_veiw.dart';
 
 class CustomNote extends StatelessWidget {
   const CustomNote({
     super.key,
+    required this.note,
   });
+
+  final NoteModel note;
 
   @override
   Widget build(BuildContext context) {
@@ -23,19 +27,19 @@ class CustomNote extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const ListTile(
+              ListTile(
                 title: Padding(
-                  padding: EdgeInsets.only(bottom: 14.0),
+                  padding: const EdgeInsets.only(bottom: 14.0),
                   child: Text(
-                    'flutter Notes',
-                    style: TextStyle(color: Colors.black, fontSize: 25),
+                    note.title,
+                    style: const TextStyle(color: Colors.black, fontSize: 25),
                   ),
                 ),
                 subtitle: Text(
-                  'abdelrahman first Notes on this app',
-                  style: TextStyle(color: Colors.grey, fontSize: 20),
+                  note.content,
+                  style: const TextStyle(color: Colors.grey, fontSize: 20),
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.delete,
                   color: Colors.black,
                   size: 30,
@@ -44,7 +48,7 @@ class CustomNote extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 24),
                 child: Text(
-                  '12/10/2023',
+                  note.date.substring(0, 10),
                   style: TextStyle(color: Colors.black.withOpacity(.5)),
                 ),
               )

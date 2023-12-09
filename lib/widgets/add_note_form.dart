@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:notes/model/note_model.dart';
+import 'package:notes/providers/add_note_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'custom_text_field.dart';
 
-class FormWidget extends StatefulWidget {
-  const FormWidget({
+class AddNoteForm extends StatefulWidget {
+  const AddNoteForm({
     super.key,
   });
 
   @override
-  State<FormWidget> createState() => _FormWidgetState();
+  State<AddNoteForm> createState() => _AddNoteFormState();
 }
 
-class _FormWidgetState extends State<FormWidget> {
+class _AddNoteFormState extends State<AddNoteForm> {
   final GlobalKey<FormState> fomKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   String? title, content;
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AddNoteProvider>(context);
     return Form(
       key: fomKey,
       autovalidateMode: autoValidateMode,
@@ -45,6 +50,14 @@ class _FormWidgetState extends State<FormWidget> {
             onPressed: () {
               if (fomKey.currentState!.validate()) {
                 fomKey.currentState!.save();
+                var noteModel = NoteModel(
+                    title: title!,
+                    content: content!,
+                    date: DateTime.now().toString(),
+                    color: Colors.lightBlueAccent.value);
+                //var noteBox = Hive.box<NoteModel>('notes_box');
+                provider.addNote(noteModel);
+                Navigator.pop(context);
               } else {
                 autoValidateMode = AutovalidateMode.always;
                 setState(() {});
@@ -54,7 +67,8 @@ class _FormWidgetState extends State<FormWidget> {
                 backgroundColor: Colors.lightBlueAccent,
                 foregroundColor: Colors.black),
             child: const Text('Add'),
-          )
+          ),
+          const SizedBox(height: 16)
         ],
       ),
     );

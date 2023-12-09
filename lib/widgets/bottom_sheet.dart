@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:notes/providers/add_note_provider.dart';
+import 'package:provider/provider.dart';
 
-import 'custom_text_field.dart';
-import 'form_widget.dart';
+import 'add_note_form.dart';
 
 class BottomSheetContent extends StatelessWidget {
   const BottomSheetContent({
@@ -10,9 +11,16 @@ class BottomSheetContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      padding: EdgeInsetsDirectional.symmetric(vertical: 50, horizontal: 12),
-      child: FormWidget(),
+    return ChangeNotifierProvider(
+      create: (context) => AddNoteProvider(),
+      child: SingleChildScrollView(
+        padding: EdgeInsetsDirectional.only(
+            top: 50,
+            start: 12,
+            end: 16,
+            bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: const AddNoteForm(),
+      ),
     );
   }
 }
