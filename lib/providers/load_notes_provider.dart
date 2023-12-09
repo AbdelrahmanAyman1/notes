@@ -1,7 +1,6 @@
-import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
-
 import '../model/note_model.dart';
+import 'package:flutter/material.dart';
 
 class LoadNotesProvider extends ChangeNotifier {
   List<NoteModel> notes = [];

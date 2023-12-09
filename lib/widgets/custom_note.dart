@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:notes/model/note_model.dart';
+import 'package:notes/providers/load_notes_provider.dart';
 import 'package:notes/views/edit_note_veiw.dart';
+import 'package:provider/provider.dart';
 
 class CustomNote extends StatelessWidget {
   const CustomNote({
@@ -12,9 +14,10 @@ class CustomNote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<LoadNotesProvider>(context);
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, EditNoteView.routeName);
+        Navigator.pushNamed(context, EditNoteView.routeName, arguments: note);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -42,6 +45,7 @@ class CustomNote extends StatelessWidget {
                 trailing: InkWell(
                   onTap: () {
                     note.delete();
+                    provider.loadNotes();
                   },
                   child: const Icon(
                     Icons.delete,

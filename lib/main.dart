@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:notes/model/note_model.dart';
 import 'package:notes/providers/add_note_provider.dart';
+import 'package:notes/providers/load_notes_provider.dart';
 import 'package:notes/views/edit_note_veiw.dart';
 import 'package:notes/views/home_view.dart';
 import 'package:provider/provider.dart';
@@ -21,16 +22,27 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          brightness: Brightness.dark,
-          fontFamily: GoogleFonts.poppins.toString()),
-      initialRoute: HomeView.routeName,
-      routes: {
-        HomeView.routeName: (context) => const HomeView(),
-        EditNoteView.routeName: (context) => const EditNoteView()
-      },
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) {
+            var provider = LoadNotesProvider();
+            provider.loadNotes();
+            return provider;
+          }),
+          ChangeNotifierProvider(
+            create: (context) => AddNoteProvider(),
+          )
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              brightness: Brightness.dark,
+              fontFamily: GoogleFonts.poppins.toString()),
+          initialRoute: HomeView.routeName,
+          routes: {
+            HomeView.routeName: (context) => const HomeView(),
+            EditNoteView.routeName: (context) => const EditNoteView()
+          },
+        ));
   }
 }
