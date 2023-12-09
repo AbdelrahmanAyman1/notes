@@ -39,10 +39,15 @@ class CustomNote extends StatelessWidget {
                   note.content,
                   style: const TextStyle(color: Colors.grey, fontSize: 20),
                 ),
-                trailing: const Icon(
-                  Icons.delete,
-                  color: Colors.black,
-                  size: 30,
+                trailing: InkWell(
+                  onTap: () {
+                    note.delete();
+                  },
+                  child: const Icon(
+                    Icons.delete,
+                    color: Colors.black,
+                    size: 30,
+                  ),
                 ),
               ),
               Padding(
